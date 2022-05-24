@@ -1,0 +1,101 @@
+﻿<Window x:Class="aerodrom.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:aerodrom"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="800">
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Button" x:Key="dugme">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style x:Key="dodaj" TargetType="Button" BasedOn="{StaticResource dugme}">
+            <Setter Property="Background" Value="#94C973"/>
+        </Style>
+        <Style x:Key="obrisi" TargetType="Button" BasedOn="{StaticResource dugme}">
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Key="izmeni" TargetType="Button" BasedOn="{StaticResource dugme}">
+            <Setter Property="Background" Value="#e99d4e"/>
+        </Style>
+        <Style x:Key="citaj" TargetType="Button" BasedOn="{StaticResource dugme}">
+            <Setter Property="Background" Value="#555533"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Center">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tip aviona:"/>
+                    <ComboBox x:Name="cbTip"
+                              SelectedValue="{Binding Avion.Tip}"
+                        />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Serijski tip aviona:"/>
+                    <TextBox Text="{Binding Avion.SerijskiBroj, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Registracioni tip aviona:"/>
+                    <TextBox Text="{Binding Avion.RegistracioniTip, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Vlasnik:"/>
+                    <TextBox Text="{Binding Avion.Vlasnik, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Broj sedista:"/>
+                    <TextBox Text="{Binding Avion.BrojSedista, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Kapacitet rezervoara:"/>
+                    <TextBox Text="{Binding Avion.Kapacitet, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Nosivost:"/>
+                    <TextBox Text="{Binding Avion.Nosivost, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Broj Raketa:"/>
+                    <TextBox Text="{Binding Avion.BrojRaketa, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Dodaj" Style="{StaticResource dodaj}" Click="Add_Click"/>
+                    <Button Content="Obrisi" Style="{StaticResource obrisi}" Click="Delete_Click"/>
+                    <Button Content="Izmeni" Style="{StaticResource izmeni}" Click="Update_Click"/>
+                    <Button Content="Citaj" Style="{StaticResource citaj}" Click="Read_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Avioni}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding Tip}" Header="Tip"/>
+                <DataGridTextColumn Width="*" Binding="{Binding SerijskiBroj}" Header="Serijski Broj"/>
+                <DataGridTextColumn Width="*" Binding="{Binding RegistracioniTip}" Header="Registracioni Tip"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Vlasnik}" Header="Vlasnik"/>
+                <DataGridTextColumn Width="*" Binding="{Binding BrojSedista}" Header="Broj Sedista"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Kapacitet}" Header="Kapacitet"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Nosivost}" Header="Nosivost"/>
+                <DataGridTextColumn Width="*" Binding="{Binding BrojRaketa}" Header="Broj Raketa"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
